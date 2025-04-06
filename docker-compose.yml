@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  pluto-node:
+    build:
+      context: .
+      dockerfile: docker/pluto.Dockerfile
+    ports:
+      - "26656:26656"
+      - "26657:26657"
+      - "1317:1317"
+      - "9090:9090"
+    volumes:
+      - pluto-data:/root/.pluto-chain
+    command: ["start", "--minimum-gas-prices", "0.025stake", "--home", "/root/.pluto-chain"]
+
+volumes:
+  pluto-data:
