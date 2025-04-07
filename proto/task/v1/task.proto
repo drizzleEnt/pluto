@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package tasks.v1;
+
+option go_package = "x/tasks/types";
+
+message Task {
+    uint64 id = 1;
+    string creator = 2;
+    string description = 3;
+    bool completed = 4;
+}
+
+message MsgCreateTaskResponse {
+    uint64 id = 1;
+}
+
+message MsgCompleteTask {
+    string creator = 1;
+    uint64 id = 2;
+}
+
+message MsgCompleteTaskResponse {}
+
+service Query {
+    rpc Task (QueryTaskRequest) returns (QueryTaskResponse);
+}
+
+message QueryTaskRequest {
+    uint64 id = 1;
+}
+
+message QueryTaskResponse {
+    Task task = 1;
+}
